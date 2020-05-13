@@ -1,8 +1,12 @@
 new p5();
+let cam;
 function setup(){
     let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
     pointerLockSetup();
+    cam = createCamera();
+    setCamera(cam);
 }
+
 let keys = {}, clicked;
 keyPressed = function(){
 	keys[key] = true;
@@ -25,9 +29,7 @@ function pointerLockSetup(){
 function draw(){
     background(0, 0, 255);
     push();
-    //translate(-player.x, -player.y, -player.z);
-    camera(player.x, player.y, player.z, 0, 0, 0, 0, 1, 0);
-    //rotateX(50);
+    cam.setPosition(player.x, player.y, player.z);
     for(var i in blocks){
         blocks[i].run(player);
     }
