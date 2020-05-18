@@ -10,8 +10,12 @@ function Player(x, y, z){
     this.zvel = 0;
     this.grounded = false;
     this.speed = 0.5;
+    this.rotateX = this.x;
+    this.rotateY = this.y;
 }
 Player.prototype.run = function(){
+    cam.setPosition(this.x, this.y, this.z+this.depth);
+    //cam.lookAt(this.rotateX, this.rotateY);
     this.display();
     this.update();
     this.control();

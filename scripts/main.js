@@ -29,7 +29,6 @@ function pointerLockSetup(){
 function draw(){
     background(0, 0, 255);
     push();
-    cam.setPosition(player.x, player.y, player.z);
     for(var i in blocks){
         blocks[i].run(player);
     }
