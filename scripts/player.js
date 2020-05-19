@@ -15,6 +15,8 @@ function Player(x, y, z){
 }
 Player.prototype.run = function(){
     cam.setPosition(this.x, this.y, this.z+this.depth);
+    cam.pan(-this.rotateX*mouseSensitivity);
+    cam.tilt(this.rotateY*mouseSensitivity);
     //cam.lookAt(this.rotateX, this.rotateY);
     this.display();
     this.update();
@@ -45,6 +47,8 @@ Player.prototype.update = function(){
     } else{
         this.yvel = 0;
     }
+    this.rotateX = movedX;
+    this.rotateY = movedY;
 }
 Player.prototype.control = function(){
     if(keys[UP_ARROW] || keys.w){

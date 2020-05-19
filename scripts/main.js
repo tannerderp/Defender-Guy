@@ -1,5 +1,6 @@
 new p5();
 let cam;
+let mouseSensitivity = 0.005; //change this variable to change the sensitivity if i haven't added a settings menu yet...
 function setup(){
     let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
     pointerLockSetup();
