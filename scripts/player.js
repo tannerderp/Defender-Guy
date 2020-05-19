@@ -10,14 +10,21 @@ function Player(x, y, z){
     this.zvel = 0;
     this.grounded = false;
     this.speed = 0.5;
-    this.rotateX = this.x;
-    this.rotateY = this.y;
+    this.rotateX = 0;
+    this.rotateY = 0;
+}
+// Math function
+Player.prototype.getCameraDirection = function(useY) {
+    let z = cos(this.rotateY) * (useY ? cos(this.rotateX) : 1);
+    let x = sin(this.rotateY) * (useY ? cos(this.rotateX) : 1);
+    let y = useY ? sin(this.rotateX) : 1;
+    return { x: x, y: y, z: z };
 }
 Player.prototype.run = function(){
-    cam.setPosition(this.x, this.y, this.z+this.depth);
-    cam.pan(-this.rotateX*mouseSensitivity);
-    cam.tilt(this.rotateY*mouseSensitivity);
-    //cam.lookAt(this.rotateX, this.rotateY);
+    let z = this.z + this.depth;
+    cam.setPosition(this.x, this.y, z);
+    let dir = this.getCameraDirection(true);
+    cam.lookAt(dir.x + this.x, dir.y + this.y, dir.z + z);
     this.display();
     this.update();
     this.control();
@@ -47,24 +54,33 @@ Player.prototype.update = function(){
     } else{
         this.yvel = 0;
     }
-    this.rotateX = movedX;
-    this.rotateY = movedY;
+    // rotateX is rotation around the x-axis
+    this.rotateX = constrain(this.rotateX + movedY * mouseSensitivity, -180, 180);
+    // rotateY is rotation around the y-axis
+    this.rotateY -= movedX * mouseSensitivity;
 }
 Player.prototype.control = function(){
+    // we don't want to slow down while looking up
+    var dir = this.getCameraDirection(false);
     if(keys[UP_ARROW] || keys.w){
-        this.zvel -= this.speed;
+        this.zvel += dir.z;
+        this.xvel += dir.x;
     }
     if(keys[DOWN_ARROW] || keys.s){
-        this.zvel += this.speed;
+        this.zvel -= dir.z;
+        this.xvel -= dir.x;
     }
-    if(keys[RIGHT_ARROW] || keys.d){
-        this.xvel += this.speed;
+    if (keys[RIGHT_ARROW] || keys.d) {
+        // notice how dir.x and dir.z are switched
+        this.zvel += dir.x;
+        this.xvel -= dir.z;
     }
-    if(keys[LEFT_ARROW] || keys.a){
-        this.xvel -= this.speed;
+    if (keys[LEFT_ARROW] || keys.a) {
+        this.zvel -= dir.x;
+        this.xvel += dir.z;
     }
     if(keys[32] && this.grounded){
-        this.yvel = -5;
+        this.yvel -= 5;
     }
 }
 let player = new Player(0, -200, 150);
