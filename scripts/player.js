@@ -58,6 +58,7 @@ Player.prototype.update = function(){
     this.rotateX = constrain(this.rotateX + movedY * mouseSensitivity, -180, 180);
     // rotateY is rotation around the y-axis
     this.rotateY -= movedX * mouseSensitivity;
+    this.rotateX = constrain(this.rotateX, -50, 50);
 }
 Player.prototype.control = function(){
     // we don't want to slow down while looking up

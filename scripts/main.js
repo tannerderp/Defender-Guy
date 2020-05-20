@@ -1,7 +1,7 @@
 new p5();
 let cam;
 // since we are working in DEGREES now this is much higher
-let mouseSensitivity = 1; //change this variable to change the sensitivity if i haven't added a settings menu yet...
+let mouseSensitivity = 0.40; //change this variable to change the sensitivity if i haven't added a settings menu yet...
 function setup(){
     let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
     pointerLockSetup();
@@ -40,3 +40,6 @@ function draw(){
 
     clicked = false;
 }
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
