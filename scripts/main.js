@@ -1,5 +1,17 @@
+//reference so i can get p5 documentation on vscode
+///  <reference path="../libs/p5.global-mode.d.ts" /> 
+
 new p5();
-let cam;
+let cam, ui;
+let imgs = {};
+function preload(){
+    //load images
+    imgs.player = {};
+    imgs.player.gun = [];
+    for(let i = 0; i<6; i++){
+        imgs.player.gun[i] = loadImage("/sprites/player/"+i+".png");
+    }
+}
 // since we are working in DEGREES now this is much higher
 let mouseSensitivity = 0.40; //change this variable to change the sensitivity if i haven't added a settings menu yet...
 function setup(){
@@ -8,6 +20,8 @@ function setup(){
     cam = createCamera();
     setCamera(cam);
     angleMode(DEGREES);
+    imageMode(CENTER);
+    ui = createGraphics(windowWidth, windowHeight);
 }
 
 let keys = {}, clicked;
@@ -30,12 +44,17 @@ function pointerLockSetup(){
     }
 }
 function draw(){
-    background(0, 0, 255);
     push();
+    cam.eyeZ = cam.defaultEyeZ;
+    background(0, 0, 255);
     for(var i in blocks){
         blocks[i].run(player);
     }
     player.run();
+    pop();
+    push();
+    ui.image(imgs.player.gun[0], 0, 0);
+    image(ui, 0, 0, 0);
     pop();
 
     clicked = false;

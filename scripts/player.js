@@ -24,6 +24,9 @@ Player.prototype.run = function(){
     let z = this.z + this.depth;
     cam.setPosition(this.x, this.y, z);
     let dir = this.getCameraDirection(true);
+    this.gay = dir.z +z;
+    this.gayer = dir.x + this.x;
+    this.gayest = dir.y + this.y;
     cam.lookAt(dir.x + this.x, dir.y + this.y, dir.z + z);
     this.display();
     this.update();
@@ -31,17 +34,12 @@ Player.prototype.run = function(){
     this.grounded = false;
 }
 Player.prototype.display = function(){
-    /*
-    push(); //temporary player model, this will be first person once i get collisions done
-    translate(this.x, this.y, this.z);
-    fill(255, 0, 0);
-    box(this.width, this.height, this.depth);
+    /*push();
+    translate(this.gayer, this.gayest, this.gay);
+    rotateX(this.rotateX);
+    rotateY(this.rotateY);
+    image(imgs.player.gun[0], 0, 0);
     pop();*/
-    push();
-    translate(this.x, -49, this.z); //shadow, this is not temporary
-    fill(0, 0, 0);
-    box(this.width, 2, this.depth);
-    pop();
 }
 Player.prototype.update = function(){
     this.x += this.xvel;
