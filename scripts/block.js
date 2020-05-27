@@ -15,7 +15,7 @@ Block.prototype.display = function(){
     push();
     translate(this.x, this.y, this.z);
     fill(this.color);
-    box(this.width, this.height, this.depth);
+    world.box(this.width, this.height, this.depth);
     pop();
 }
 Block.prototype.collide = function(p){

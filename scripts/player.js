@@ -24,9 +24,6 @@ Player.prototype.run = function(){
     let z = this.z + this.depth;
     cam.setPosition(this.x, this.y, z);
     let dir = this.getCameraDirection(true);
-    this.gay = dir.z +z;
-    this.gayer = dir.x + this.x;
-    this.gayest = dir.y + this.y;
     cam.lookAt(dir.x + this.x, dir.y + this.y, dir.z + z);
     this.display();
     this.update();

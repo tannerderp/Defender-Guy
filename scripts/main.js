@@ -2,7 +2,7 @@
 ///  <reference path="../libs/p5.global-mode.d.ts" /> 
 
 new p5();
-let cam, ui;
+let cam, uiCam, ui, world;
 let imgs = {};
 function preload(){
     //load images
@@ -18,10 +18,13 @@ function setup(){
     let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
     pointerLockSetup();
     cam = createCamera();
-    setCamera(cam);
+    uiCam = createCamera();
+    setCamera(uiCam);
     angleMode(DEGREES);
     imageMode(CENTER);
     ui = createGraphics(windowWidth, windowHeight);
+    world = createGraphics(windowWidth, windowHeight, WEBGL);
+    world.setCamera(cam);
 }
 
 let keys = {}, clicked;
@@ -44,17 +47,17 @@ function pointerLockSetup(){
     }
 }
 function draw(){
-    push();
-    cam.eyeZ = cam.defaultEyeZ;
     background(0, 0, 255);
+    push();
+    world.setCamera(cam);
+    world.background(0, 0, 255);
     for(var i in blocks){
         blocks[i].run(player);
     }
     player.run();
-    pop();
-    push();
-    ui.image(imgs.player.gun[0], 0, 0);
-    image(ui, 0, 0, 0);
+    image(world, 0, 0);
+    pop();    push();
+    image(imgs.player.gun[0], 0, 0);
     pop();
 
     clicked = false;
