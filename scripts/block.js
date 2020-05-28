@@ -10,6 +10,7 @@ function Block(x, y, z, width, height, depth, color){
 Block.prototype.run = function(p){
     this.display();
     this.collide(p);
+    this.y += 10;
 }
 Block.prototype.display = function(){
     push();

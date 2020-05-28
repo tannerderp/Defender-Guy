@@ -9,7 +9,7 @@ function preload(){
     imgs.player = {};
     imgs.player.gun = [];
     for(let i = 0; i<6; i++){
-        imgs.player.gun[i] = loadImage("/sprites/player/"+i+".png");
+        imgs.player.gun[i] = loadImage("../sprites/player/"+i+".png");
     }
 }
 // since we are working in DEGREES now this is much higher
@@ -23,7 +23,7 @@ function setup(){
     angleMode(DEGREES);
     imageMode(CENTER);
     ui = createGraphics(windowWidth, windowHeight);
-    world = createGraphics(windowWidth, windowHeight, WEBGL);
+    world = createGraphics(windowWidth, windowHeight, WEBGL)
     world.setCamera(cam);
 }
 
@@ -56,7 +56,8 @@ function draw(){
     }
     player.run();
     image(world, 0, 0);
-    pop();    push();
+    pop();
+    push();
     image(imgs.player.gun[0], 0, 0);
     pop();
 
