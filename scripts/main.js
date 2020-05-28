@@ -22,9 +22,9 @@ function setup(){
     setCamera(uiCam);
     angleMode(DEGREES);
     imageMode(CENTER);
-    ui = createGraphics(windowWidth, windowHeight);
+    //ui = createGraphics(windowWidth, windowHeight);
     world = createGraphics(windowWidth, windowHeight, WEBGL)
-    world.setCamera(cam);
+    //world.setCamera(cam);
 }
 
 let keys = {}, clicked;
@@ -49,18 +49,21 @@ function pointerLockSetup(){
 function draw(){
     background(0, 0, 255);
     push();
-    world.setCamera(cam);
+    translate(0, 0, -100)
+    push();
     world.background(0, 0, 255);
     for(var i in blocks){
         blocks[i].run(player);
     }
     player.run();
-    image(world, 0, 0);
+    texture(world);
+    world.translate(0, 0, 0);
+    box(windowWidth, windowHeight, 5);
     pop();
-    push();
+    /*push();
     image(imgs.player.gun[0], 0, 0);
+    pop();*/
     pop();
-
     clicked = false;
 }
 function windowResized() {

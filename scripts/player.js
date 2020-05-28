@@ -21,6 +21,7 @@ Player.prototype.getCameraDirection = function(useY) {
     return { x: x, y: y, z: z };
 }
 Player.prototype.run = function(){
+    world.push();
     let z = this.z + this.depth;
     cam.setPosition(this.x, this.y, z);
     let dir = this.getCameraDirection(true);
@@ -29,6 +30,7 @@ Player.prototype.run = function(){
     this.update();
     this.control();
     this.grounded = false;
+    world.pop();
 }
 Player.prototype.display = function(){
     /*push();

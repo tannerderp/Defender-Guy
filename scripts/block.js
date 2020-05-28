@@ -10,14 +10,14 @@ function Block(x, y, z, width, height, depth, color){
 Block.prototype.run = function(p){
     this.display();
     this.collide(p);
-    this.y += 10;
+    this.color = color(255, 0, 0);
 }
 Block.prototype.display = function(){
-    push();
-    translate(this.x, this.y, this.z);
+    world.push();
+    world.translate(this.x, this.y, this.z);
     fill(this.color);
     world.box(this.width, this.height, this.depth);
-    pop();
+    world.pop();
 }
 Block.prototype.collide = function(p){
     let xvel = abs(p.xvel);
