@@ -14,7 +14,7 @@ Block.prototype.run = function(p){
 }
 Block.prototype.display = function(){
     world.push();
-    world.translate(this.x, this.y, this.z);
+    world.translate(this.x-player.x, this.y-player.y, this.z+player.z+player.depth);
     fill(this.color);
     world.box(this.width, this.height, this.depth);
     world.pop();

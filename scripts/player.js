@@ -22,10 +22,10 @@ Player.prototype.getCameraDirection = function(useY) {
 }
 Player.prototype.run = function(){
     world.push();
-    let z = this.z + this.depth;
+    /*let z = this.z + this.depth;
     cam.setPosition(this.x, this.y, z);
     let dir = this.getCameraDirection(true);
-    cam.lookAt(dir.x + this.x, dir.y + this.y, dir.z + z);
+    cam.lookAt(dir.x + this.x, dir.y + this.y, dir.z + z);*/
     this.display();
     this.update();
     this.control();
@@ -80,5 +80,8 @@ Player.prototype.control = function(){
     if(keys[32] && this.grounded){
         this.yvel -= 5;
     }
+}
+Player.prototype.setCamera = function(){ //since cameras don't appear to work in create graphics webgl, i'll move all the blocks around the camera
+    translate(-this.x, -this.y, -(this.z-this.depth));
 }
 let player = new Player(0, -200, 150);

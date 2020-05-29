@@ -49,21 +49,26 @@ function pointerLockSetup(){
 function draw(){
     background(0, 0, 255);
     push();
-    translate(0, 0, -100)
+    uiCam.setPosition(0, 0, -700);
+    uiCam.lookAt(0, 0, 100);
     push();
+    world.push();
     world.background(0, 0, 255);
+    player.setCamera();
     for(var i in blocks){
         blocks[i].run(player);
     }
     player.run();
-    texture(world);
-    world.translate(0, 0, 0);
-    box(windowWidth, windowHeight, 5);
+    world.pop();
+    pop();
+    pop();
+    push();
+    translate(0, 0, 100);
+    image(world, 0, 0);
     pop();
     /*push();
     image(imgs.player.gun[0], 0, 0);
     pop();*/
-    pop();
     clicked = false;
 }
 function windowResized() {
