@@ -6,6 +6,7 @@ function Block(x, y, z, width, height, depth, color){
     this.height = height;
     this.depth = depth;
     this.color = color;
+    this.gay = 5;
 }
 Block.prototype.run = function(p){
     this.display();

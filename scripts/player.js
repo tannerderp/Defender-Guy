@@ -82,6 +82,8 @@ Player.prototype.control = function(){
     }
 }
 Player.prototype.setCamera = function(){ //since cameras don't appear to work in create graphics webgl, i'll move all the blocks around the camera
-    translate(-this.x, -this.y, -(this.z-this.depth));
+world.rotateX(-this.rotateX*mouseSensitivity);
+    world.rotateY(-this.rotateY*mouseSensitivity);
+    translate(-this.x+this.width/2, -this.y+this.height/2, -(this.z-this.depth));
 }
 let player = new Player(0, -200, 150);
